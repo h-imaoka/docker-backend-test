@@ -11,12 +11,13 @@ app.config.update(DEBUG=True)
 _HC_URL = os.environ.get("HC_URL", "/")
 _TIMEOUT = int(os.environ.get("CONN_TIMEOUT", "10"))
 _PORT = int(os.environ.get("CONTAINER_PORT", "5000"))
+_PREFIX = os.environ.get("URL_PREFIX", "/")
 
 @app.route(_HC_URL)
 def healthcheck():
     return '{"status": "OK"}'
 
-@app.route('/tcp/<endpoint>')
+@app.route(_PREFIX + 'tcp/<endpoint>')
 def testconn(endpoint):
     try:
         (host, port) = endpoint.split(':')
