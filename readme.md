@@ -23,3 +23,13 @@ http://0.0.0.0:5000/tcp/google.coma:80
 `CONN_TIMEOUT` tcp connection timeout res = second. (default 10)  
 `CONTAINER_PORT` Bind port @ container (for fargate)  
 `URL_PREFIX` Url prefix for alb path routing. This param nothing to do with `HC_URL`.  (default "/")  
+`SINGLE_APP` Single-path web-api & __post & json.__ (default /app)  
+
+# Via post & json
+```
+curl -H "Content-Type: application/json" \
+-X POST -d '{"type": "tcp", "endpoint": "google.com:80"}' \
+http://0.0.0.0:5000/app
+
+{"result": "OK", "message": "all ok."}
+```
